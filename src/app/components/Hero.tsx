@@ -27,11 +27,11 @@ export function Hero({ hero, theme, contact }: HeroProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const dentistImages = [
-    "https://images.pexels.com/photos/6627413/pexels-photo-6627413.jpeg?_gl=1*z344dt*_ga*MTA3MzY1ODY1NS4xNzc2MDk5NTM4*_ga_8JE65Q40S6*czE3NzYwOTk1MzckbzEkZzEkdDE3NzYwOTk1NDUkajUyJGwwJGgw",
-    "https://images.pexels.com/photos/3946835/pexels-photo-3946835.jpeg?_gl=1*1l3h2wu*_ga*MTA3MzY1ODY1NS4xNzc2MDk5NTM4*_ga_8JE65Q40S6*czE3NzYwOTk1MzckbzEkZzEkdDE3NzYwOTk1ODEkajE2JGwwJGgw", 
-    "https://images.pexels.com/photos/4687401/pexels-photo-4687401.jpeg?_gl=1*mjegul*_ga*MTA3MzY1ODY1NS4xNzc2MDk5NTM4*_ga_8JE65Q40S6*czE3NzYwOTk1MzckbzEkZzEkdDE3NzYwOTk2MTUkajQyJGwwJGgw",
-    "https://images.pexels.com/photos/5622232/pexels-photo-5622232.jpeg?_gl=1*g8dqx8*_ga*MTA3MzY1ODY1NS4xNzc2MDk5NTM4*_ga_8JE65Q40S6*czE3NzYwOTk1MzckbzEkZzEkdDE3NzYwOTk2MzEkajI2JGwwJGgw",
-    "https://images.pexels.com/photos/15688027/pexels-photo-15688027.jpeg?_gl=1*e515bw*_ga*MTA3MzY1ODY1NS4xNzc2MDk5NTM4*_ga_8JE65Q40S6*czE3NzYwOTk1MzckbzEkZzEkdDE3NzYwOTk2NDQkajEzJGwwJGgw"
+    "https://images.pexels.com/photos/6627413/pexels-photo-6627413.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/3946835/pexels-photo-3946835.jpeg?auto=compress&cs=tinysrgb&w=400", 
+    "https://images.pexels.com/photos/4687401/pexels-photo-4687401.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/5622232/pexels-photo-5622232.jpeg?auto=compress&cs=tinysrgb&w=400",
+    "https://images.pexels.com/photos/15688027/pexels-photo-15688027.jpeg?auto=compress&cs=tinysrgb&w=400"
   ];
 
   const scrollToContact = () => {
