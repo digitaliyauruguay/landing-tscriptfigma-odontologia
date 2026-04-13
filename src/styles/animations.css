@@ -1,0 +1,187 @@
+/* Organic animations and micro-interactions */
+
+/* Floating cursor effect */
+.organic-cursor {
+  cursor: none;
+}
+
+.organic-cursor::after {
+  content: '';
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B5A3C, #D4A574);
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out;
+  mix-blend-mode: difference;
+}
+
+/* Organic hover effects */
+.organic-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.organic-hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 165, 116, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.organic-hover:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Organic floating animation */
+@keyframes organic-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(0.5deg);
+  }
+}
+
+.organic-float {
+  animation: organic-float 6s ease-in-out infinite;
+}
+
+/* Organic pulse animation */
+@keyframes organic-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+.organic-pulse {
+  animation: organic-pulse 4s ease-in-out infinite;
+}
+
+/* Organic slide-in animation */
+@keyframes organic-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.organic-slide-in {
+  animation: organic-slide-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Organic reveal animation */
+@keyframes organic-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.organic-reveal {
+  animation: organic-reveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Staggered animations for organic feel */
+.organic-stagger-1 { animation-delay: 0.1s; }
+.organic-stagger-2 { animation-delay: 0.2s; }
+.organic-stagger-3 { animation-delay: 0.3s; }
+.organic-stagger-4 { animation-delay: 0.4s; }
+.organic-stagger-5 { animation-delay: 0.5s; }
+
+/* Organic text gradient effect */
+.organic-text-gradient {
+  background: linear-gradient(135deg, #8B5A3C, #D4A574, #E8D5C4);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: organic-gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes organic-gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Organic shape morphing */
+@keyframes organic-morph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+}
+
+.organic-morph {
+  animation: organic-morph 8s ease-in-out infinite;
+}
+
+/* Organic breathing effect */
+@keyframes organic-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+  }
+}
+
+.organic-breathe {
+  animation: organic-breathe 4s ease-in-out infinite;
+}
+
+/* Custom scrollbar for organic feel */
+.organic-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.organic-scrollbar::-webkit-scrollbar-track {
+  background: #F5E6D3;
+  border-radius: 10px;
+}
+
+.organic-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8B5A3C, #D4A574);
+  border-radius: 10px;
+}
+
+.organic-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #6B4423, #8B5A3C);
+}

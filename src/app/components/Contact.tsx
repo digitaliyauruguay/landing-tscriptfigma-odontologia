@@ -17,13 +17,92 @@ interface ContactProps {
 
 export function Contact({ contact, theme, brandName }: ContactProps) {
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [honeypot, setHoneypot] = useState("");
+
+  const clearFieldError = (fieldName: string) => {
+    setErrors(prev => {
+      const newErrors = { ...prev };
+      delete newErrors[fieldName];
+      return newErrors;
+    });
+    
+    // Clear form status if there are no more errors
+    if (formStatus === "success" || formStatus === "error") {
+      setFormStatus("idle");
+    }
+  };
+
+  const handleFieldChange = (fieldName: string) => {
+    clearFieldError(fieldName);
+  };
+
+  const validateForm = (formData: FormData) => {
+    const newErrors: Record<string, string> = {};
+    
+    // Name validation
+    const name = formData.get('name') as string;
+    if (!name || name.trim().length < 2) {
+      newErrors.name = 'El nombre debe tener al menos 2 caracteres';
+    } else if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]+$/.test(name)) {
+      newErrors.name = 'El nombre solo puede contener letras y caracteres válidos';
+    } else if (name.trim().length > 50) {
+      newErrors.name = 'El nombre no puede exceder 50 caracteres';
+    }
+    
+    // Phone validation
+    const phone = formData.get('phone') as string;
+    if (!phone || phone.trim().length < 8) {
+      newErrors.phone = 'El teléfono debe tener al menos 8 dígitos';
+    } else if (!/^[+]?[\d\s\-\(\)]+$/.test(phone)) {
+      newErrors.phone = 'El teléfono solo puede contener números y caracteres válidos';
+    }
+    
+    // Email validation
+    const email = formData.get('email') as string;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      newErrors.email = 'Por favor, introduce un email válido';
+    }
+    
+    // Service validation
+    const service = formData.get('service') as string;
+    if (!service || service === '') {
+      newErrors.service = 'Por favor, selecciona un servicio';
+    }
+    
+    // Message validation
+    const message = formData.get('message') as string;
+    if (!message || message.trim().length < 10) {
+      newErrors.message = 'El mensaje debe tener al menos 10 caracteres';
+    } else if (message.trim().length > 500) {
+      newErrors.message = 'El mensaje no puede exceder 500 caracteres';
+    }
+    
+    return newErrors;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormStatus("sending");
-
+    
+    // Bot protection - check honeypot
+    if (honeypot) {
+      console.log('Bot detected - honeypot field filled');
+      return;
+    }
+    
     const form = e.currentTarget;
     const formData = new FormData(form);
+    
+    // Validate form
+    const validationErrors = validateForm(formData);
+    setErrors(validationErrors);
+    
+    if (Object.keys(validationErrors).length > 0) {
+      return;
+    }
+    
+    setFormStatus("sending");
 
     try {
       const response = await fetch(
@@ -40,6 +119,7 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
       if (response.ok) {
         setFormStatus("success");
         form.reset();
+        setErrors({});
         setTimeout(() => setFormStatus("idle"), 5000);
       } else {
         setFormStatus("error");
@@ -154,6 +234,18 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
             onSubmit={handleSubmit}
             className="space-y-6"
           >
+            {/* Honeypot field for bot protection - hidden from users */}
+            <input
+              type="text"
+              name="honeypot"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              style={{ display: 'none' }}
+              aria-hidden="true"
+            />
+
             <div>
               <label htmlFor="name" className="block mb-2">
                 Nombre completo
@@ -163,9 +255,15 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
                 id="name"
                 name="name"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2"
+                onChange={() => handleFieldChange('name')}
+                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                  errors.name ? 'border-red-500' : 'border-gray-300'
+                }`}
                 style={{ "--tw-ring-color": theme.primary } as React.CSSProperties}
               />
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+              )}
             </div>
 
             <div>
@@ -177,9 +275,15 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
                 id="phone"
                 name="phone"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2"
+                onChange={() => handleFieldChange('phone')}
+                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                  errors.phone ? 'border-red-500' : 'border-gray-300'
+                }`}
                 style={{ "--tw-ring-color": theme.primary } as React.CSSProperties}
               />
+              {errors.phone && (
+                <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+              )}
             </div>
 
             <div>
@@ -191,9 +295,15 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
                 id="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2"
+                onChange={() => handleFieldChange('email')}
+                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                  errors.email ? 'border-red-500' : 'border-gray-300'
+                }`}
                 style={{ "--tw-ring-color": theme.primary } as React.CSSProperties}
               />
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+              )}
             </div>
 
             <div>
@@ -204,7 +314,10 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
                 id="service"
                 name="service"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2"
+                onChange={() => handleFieldChange('service')}
+                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                  errors.service ? 'border-red-500' : 'border-gray-300'
+                }`}
                 style={{ "--tw-ring-color": theme.primary } as React.CSSProperties}
               >
                 <option value="">Selecciona un servicio</option>
@@ -214,7 +327,11 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
                 <option value="general">Odontología General</option>
                 <option value="diseno">Diseño de Sonrisa</option>
                 <option value="urgencias">Urgencias Dentales</option>
+                <option value="otro">Otro</option>
               </select>
+              {errors.service && (
+                <p className="mt-1 text-sm text-red-600">{errors.service}</p>
+              )}
             </div>
 
             <div>
@@ -225,9 +342,15 @@ export function Contact({ contact, theme, brandName }: ContactProps) {
                 id="message"
                 name="message"
                 rows={4}
-                className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2"
+                onChange={() => handleFieldChange('message')}
+                className={`w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 ${
+                  errors.message ? 'border-red-500' : 'border-gray-300'
+                }`}
                 style={{ "--tw-ring-color": theme.primary } as React.CSSProperties}
               />
+              {errors.message && (
+                <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+              )}
             </div>
 
             <button

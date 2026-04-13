@@ -24,17 +24,17 @@ export function FAQ({ faq, theme }: FAQProps) {
   };
 
   return (
-    <section id="faq" className="py-24 lg:py-32" style={{ backgroundColor: theme.secondary }}>
+    <section id="preguntas-frecuentes" className="py-24 lg:py-32" style={{ backgroundColor: theme.secondary }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2
             className="text-4xl lg:text-5xl tracking-tight mb-4"
             style={{ color: theme.primary }}
           >
-            Preguntas Frecuentes
+            Resuelve Tus Dudas
           </h2>
           <p className="text-xl text-gray-600">
-            Todo lo que necesitas saber
+            Preguntas clave para tomar acción
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export function FAQ({ faq, theme }: FAQProps) {
             >
               <button
                 onClick={() => toggleItem(index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors cursor-pointer hover:scale-102"
               >
                 <span className="text-lg pr-4">{item.question}</span>
                 <ChevronDown

@@ -16,17 +16,69 @@ interface ConversionPopupProps {
 export function ConversionPopup({ config, theme }: ConversionPopupProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [hasShown, setHasShown] = useState(false);
+  const [isInteractingWithContact, setIsInteractingWithContact] = useState(false);
+  const [isOnContactSection, setIsOnContactSection] = useState(false);
+
+  // Check if user is currently on contact section
+  const checkIfOnContactSection = () => {
+    const contactSection = document.getElementById('contacto');
+    if (contactSection) {
+      const rect = contactSection.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      setIsOnContactSection(isInViewport);
+    }
+  };
 
   useEffect(() => {
-    if (!config.enabled || hasShown) return;
+    if (!config.enabled || hasShown || isInteractingWithContact || isOnContactSection) return;
 
     const timer = setTimeout(() => {
-      setIsVisible(true);
-      setHasShown(true);
-    }, config.delay);
+      if (!isInteractingWithContact && !isOnContactSection) {
+        setIsVisible(true);
+        setHasShown(true);
+      }
+    }, 30000); // 30 seconds
 
     return () => clearTimeout(timer);
-  }, [config.enabled, config.delay, hasShown]);
+  }, [config.enabled, hasShown, isInteractingWithContact, isOnContactSection]);
+
+  // Track contact form interactions and scroll position
+  useEffect(() => {
+    const handleContactInteraction = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const contactSection = document.getElementById('contacto');
+      
+      if (contactSection && (contactSection.contains(target) || target.closest('#contacto'))) {
+        setIsInteractingWithContact(true);
+      }
+    };
+
+    // Track when user is typing in contact form
+    const handleFormInput = () => {
+      setIsInteractingWithContact(true);
+    };
+
+    // Check contact section visibility on scroll
+    const handleScroll = () => {
+      checkIfOnContactSection();
+    };
+
+    // Initial check
+    checkIfOnContactSection();
+
+    // Add event listeners
+    document.addEventListener('click', handleContactInteraction);
+    document.addEventListener('input', handleFormInput);
+    document.addEventListener('focus', handleFormInput, true);
+    document.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      document.removeEventListener('click', handleContactInteraction);
+      document.removeEventListener('input', handleFormInput);
+      document.removeEventListener('focus', handleFormInput, true);
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -62,7 +114,7 @@ export function ConversionPopup({ config, theme }: ConversionPopupProps) {
               {/* Close button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
+                className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-10 cursor-pointer hover:scale-110"
                 aria-label="Cerrar"
               >
                 <X size={24} />
@@ -87,7 +139,7 @@ export function ConversionPopup({ config, theme }: ConversionPopupProps) {
 
                 <button
                   onClick={handleCTA}
-                  className="w-full px-8 py-4 rounded-full text-white text-lg font-medium transition-all hover:scale-105"
+                  className="w-full px-8 py-4 rounded-full text-white text-lg font-medium transition-all hover:scale-105 cursor-pointer"
                   style={{ backgroundColor: theme.primary }}
                 >
                   {config.cta}
@@ -95,7 +147,7 @@ export function ConversionPopup({ config, theme }: ConversionPopupProps) {
 
                 <button
                   onClick={handleClose}
-                  className="mt-4 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="mt-4 text-gray-500 hover:text-gray-700 transition-colors cursor-pointer hover:scale-105"
                 >
                   No, gracias
                 </button>

@@ -1,4 +1,3 @@
-import { MessageCircle } from "lucide-react";
 import { motion } from "motion/react";
 
 interface WhatsAppButtonProps {
@@ -16,10 +15,14 @@ export function WhatsAppButton({ phone }: WhatsAppButtonProps) {
       animate={{ scale: 1 }}
       transition={{ delay: 1, type: "spring", stiffness: 200 }}
       onClick={openWhatsApp}
-      className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform group"
+      className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform group cursor-pointer"
       aria-label="Contactar por WhatsApp"
     >
-      <MessageCircle size={32} className="text-white" />
+      <img 
+        src="src/whatsapp-icon.png" 
+        alt="WhatsApp" 
+        className="w-10 h-10"
+      />
 
       {/* Pulse effect */}
       <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-20" />

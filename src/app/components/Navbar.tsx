@@ -37,7 +37,7 @@ export function Navbar({ brand, theme }: NavbarProps) {
           {/* Logo */}
           <button
             onClick={() => scrollToSection("hero")}
-            className="flex items-center gap-2 group"
+            className="flex items-center gap-2 group cursor-pointer hover:scale-105 transition-transform"
           >
             <span className="text-3xl group-hover:scale-110 transition-transform">
               {brand.logo}
@@ -52,12 +52,12 @@ export function Navbar({ brand, theme }: NavbarProps) {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {["servicios", "nosotros", "testimonios", "faq", "contacto"].map(
+            {["servicios", "nosotros", "testimonios", "preguntas-frecuentes", "contacto"].map(
               (item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="text-gray-700 hover:opacity-70 transition-opacity capitalize"
+                  className="text-gray-700 hover:opacity-70 transition-opacity capitalize cursor-pointer hover:scale-105"
                 >
                   {item}
                 </button>
@@ -65,7 +65,7 @@ export function Navbar({ brand, theme }: NavbarProps) {
             )}
             <button
               onClick={() => scrollToSection("contacto")}
-              className="px-6 py-2.5 rounded-full text-white transition-all hover:scale-105"
+              className="px-6 py-2.5 rounded-full text-white transition-all hover:scale-105 cursor-pointer"
               style={{ backgroundColor: theme.primary }}
             >
               Reservar ahora
@@ -75,7 +75,7 @@ export function Navbar({ brand, theme }: NavbarProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 cursor-pointer hover:scale-110 transition-transform"
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -85,12 +85,12 @@ export function Navbar({ brand, theme }: NavbarProps) {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden py-4 space-y-3 border-t">
-            {["servicios", "nosotros", "testimonios", "faq", "contacto"].map(
+            {["servicios", "nosotros", "testimonios", "preguntas-frecuentes", "contacto"].map(
               (item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 capitalize rounded"
+                  className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 capitalize rounded cursor-pointer hover:scale-102 transition-transform"
                 >
                   {item}
                 </button>
@@ -98,7 +98,7 @@ export function Navbar({ brand, theme }: NavbarProps) {
             )}
             <button
               onClick={() => scrollToSection("contacto")}
-              className="w-full px-6 py-3 rounded-full text-white font-medium"
+              className="w-full px-6 py-3 rounded-full text-white font-medium cursor-pointer hover:scale-105 transition-transform"
               style={{ backgroundColor: theme.primary }}
             >
               Reservar ahora

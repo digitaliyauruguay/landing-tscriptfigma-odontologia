@@ -6,6 +6,7 @@ interface FooterProps {
     phone: string;
     email: string;
     address: string;
+    mapsUrl: string;
   };
   theme: { primary: string };
 }
@@ -33,7 +34,7 @@ export function Footer({ brand, contact, theme }: FooterProps) {
           <div>
             <h3 className="text-lg mb-4">Enlaces</h3>
             <ul className="space-y-2">
-              {["servicios", "nosotros", "testimonios", "faq", "contacto"].map(
+              {["servicios", "nosotros", "testimonios", "preguntas-frecuentes", "contacto"].map(
                 (item) => (
                   <li key={item}>
                     <button
@@ -42,7 +43,7 @@ export function Footer({ brand, contact, theme }: FooterProps) {
                           .getElementById(item)
                           ?.scrollIntoView({ behavior: "smooth" });
                       }}
-                      className="text-gray-400 hover:text-white transition-colors capitalize"
+                      className="text-gray-400 hover:text-white transition-colors capitalize cursor-pointer hover:scale-105"
                     >
                       {item}
                     </button>
@@ -60,7 +61,7 @@ export function Footer({ brand, contact, theme }: FooterProps) {
                 <Phone size={18} />
                 <a
                   href={`tel:${contact.phone}`}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   {contact.phone}
                 </a>
@@ -69,14 +70,21 @@ export function Footer({ brand, contact, theme }: FooterProps) {
                 <Mail size={18} />
                 <a
                   href={`mailto:${contact.email}`}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   {contact.email}
                 </a>
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin size={18} className="mt-1" />
-                <span>{contact.address}</span>
+                <a
+                  href={contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors cursor-pointer hover:scale-105"
+                >
+                  {contact.address}
+                </a>
               </li>
             </ul>
           </div>

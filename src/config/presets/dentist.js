@@ -8,12 +8,14 @@ export const dentistConfig = {
 
   // THEMING
   theme: {
-    primary: "#0EA5E9", // Sky blue - confianza profesional
-    primaryHover: "#0284C7",
-    secondary: "#F0F9FF", // Sky light - limpieza
-    accent: "#10B981", // Green - salud
-    dark: "#0F172A",
-    light: "#FFFFFF",
+    primary: "#8B5A3C", // Warm terracotta - earthy confidence
+    primaryHover: "#6B4423",
+    secondary: "#F5E6D3", // Creamy beige - natural warmth
+    accent: "#D4A574", // Sandy gold - organic luxury
+    dark: "#2C1810", // Deep earth brown
+    light: "#FEFAF6", // Warm off-white
+    gradient: "linear-gradient(135deg, #8B5A3C 0%, #D4A574 100%)", // Organic gradient
+    organic: "#E8D5C4", // Soft clay tone
   },
 
   // HERO
@@ -111,28 +113,28 @@ export const dentistConfig = {
   // FAQ
   faq: [
     {
-      question: "¿La primera consulta es realmente gratis?",
-      answer: "Sí, tu primera consulta incluye revisión completa, diagnóstico y plan de tratamiento sin costo. Solo pagas si decides continuar.",
+      question: "¿Cómo empiezo mi transformación dental hoy?",
+      answer: "¡Fácil! Reserva tu consulta gratuita haciendo clic en 'Reservar Consulta Gratis' o llámanos al WhatsApp. En tu primera visita evaluamos tu caso y creamos un plan personalizado.",
     },
     {
-      question: "¿Aceptan seguros dentales?",
-      answer: "Sí, trabajamos con las principales aseguradoras. También ofrecemos planes de financiamiento desde 3 hasta 24 meses sin intereses.",
+      question: "¿Qué métodos de pago aceptan para los tratamientos?",
+      answer: "Aceptamos efectivo, tarjetas de crédito/débito, y ofrecemos planes de financiamiento de 3 a 24 meses sin intereses. También trabajamos con las principales aseguradoras dentales.",
     },
     {
-      question: "¿Los tratamientos son dolorosos?",
-      answer: "Utilizamos anestesia local y técnicas modernas para minimizar cualquier molestia. La mayoría de nuestros pacientes reportan tratamientos sin dolor.",
+      question: "¿Qué tan rápido puedo ver resultados con blanqueamiento dental?",
+      answer: "Verás resultados inmediatos después de la primera sesión de 1 hora. El efecto completo se desarrolla en 48-72 horas, durando de 1 a 3 años con buenos cuidados.",
     },
     {
-      question: "¿Cuánto dura un blanqueamiento dental?",
-      answer: "El tratamiento dura 1 hora. Los resultados pueden durar de 1 a 3 años dependiendo de tus hábitos alimenticios y cuidado dental.",
+      question: "¿Es doloroso el proceso de ortodoncia invisible?",
+      answer: "No, los alineadores son cómodos y se ajustan gradualmente. Solo sentirás una leve presión los primeros días que desaparece rápidamente. Nuestros pacientes lo describen como 'casi invisible'.",
     },
     {
-      question: "¿Tienen estacionamiento?",
-      answer: "Sí, contamos con estacionamiento gratuito para pacientes justo en frente de la clínica.",
+      question: "¿Qué incluye la garantía en los implantes dentales?",
+      answer: "Todos nuestros implantes tienen garantía de por vida. Esto cubre cualquier defecto de fabricación y te da tranquilidad total en tu inversión. Además, ofrecemos seguimiento gratuito por 10 años.",
     },
     {
-      question: "¿Atienden urgencias los fines de semana?",
-      answer: "Sí, tenemos guardia 24/7 para urgencias. Llama a nuestro número de WhatsApp y te atenderemos de inmediato.",
+      question: "¿Cómo sé qué tratamiento es ideal para mí?",
+      answer: "En tu consulta gratuita realizamos un diagnóstico completo con tecnología 3D. Te explicamos todas las opciones, sus beneficios y costos, para que tomes la mejor decisión informada. Sin compromiso.",
     },
   ],
 
@@ -144,7 +146,7 @@ export const dentistConfig = {
     address: "Av. Reforma 123, Col. Centro, CDMX",
     mapsUrl: "https://maps.google.com/?q=Av.+Reforma+123+CDMX",
     schedule: "Lun-Vie: 9am-8pm | Sáb: 9am-3pm",
-    formspreeId: "YOUR_FORMSPREE_ID", // Reemplazar con el ID real de Formspree
+    formspreeId: "xyklywda", // Formspree endpoint para pruebas
   },
 
   // POPUP CONFIG
