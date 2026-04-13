@@ -2,6 +2,24 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Phone, MessageCircle, Leaf, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 
+// Add CSS animation for fade-in effect
+const fadeInAnimation = `
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+`;
+
 interface HeroProps {
   hero: {
     title: string;
@@ -60,41 +78,34 @@ export function Hero({ hero, theme, contact }: HeroProps) {
   }, []);
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ backgroundColor: theme.secondary }}
-    >
-      {/* Organic Background Elements */}
-      <div className="absolute inset-0 z-0">
-        {/* Floating organic shapes */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.12 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          className="absolute top-1/4 right-10 w-32 h-32 rounded-full"
+    <>
+      <style>{fadeInAnimation}</style>
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center overflow-hidden"
+        style={{ backgroundColor: theme.secondary }}
+      >
+      {/* Organic Background Elements - Optimized for mobile */}
+      <div className="absolute inset-0 z-0 hidden lg:block">
+        {/* Floating organic shapes - desktop only */}
+        <div
+          className="absolute top-1/4 right-10 w-32 h-32 rounded-full opacity-10"
           style={{ 
             background: theme.gradient,
             filter: "blur(60px)"
           }}
         />
         
-        <motion.div
-          initial={{ scale: 0.6, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.15 }}
-          transition={{ duration: 2.5, ease: "easeOut" }}
-          className="absolute top-1/2 right-20 w-24 h-24 rounded-full"
+        <div
+          className="absolute top-1/2 right-20 w-24 h-24 rounded-full opacity-15"
           style={{ 
             background: theme.accent,
             filter: "blur(40px)"
           }}
         />
         
-        <motion.div
-          initial={{ scale: 0.7, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.1 }}
-          transition={{ duration: 3, ease: "easeOut" }}
-          className="absolute bottom-1/4 right-32 w-20 h-20 rounded-full"
+        <div
+          className="absolute bottom-1/4 right-32 w-20 h-20 rounded-full opacity-10"
           style={{ 
             background: theme.organic,
             filter: "blur(50px)"
@@ -109,19 +120,13 @@ export function Hero({ hero, theme, contact }: HeroProps) {
           {/* Left Side - Text and Buttons */}
           <div className="flex-1 lg:flex-initial lg:w-1/2">
             {/* Organic decorative element */}
-            <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "80px", opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="h-1 rounded-full mb-6 lg:mb-8"
+            <div
+              className="h-1 rounded-full mb-6 lg:mb-8 w-20 opacity-0 animate-fade-in"
               style={{ backgroundColor: theme.accent }}
             />
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6"
+            <div
+              className="flex items-center gap-2 lg:gap-3 mb-4 lg:mb-6 opacity-0 animate-fade-in"
             >
               <Leaf size={20} style={{ color: theme.primary }} />
               <span 
@@ -130,41 +135,30 @@ export function Hero({ hero, theme, contact }: HeroProps) {
               >
                 Sonrisas Naturales
               </span>
-            </motion.div>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-3xl lg:text-5xl xl:text-7xl font-bold mb-4 lg:mb-6 leading-tight"
+            <h1
+              className="text-3xl lg:text-6xl font-bold mb-4 lg:mb-6 leading-tight opacity-0 animate-fade-in"
               style={{ 
                 color: theme.primary,
                 background: theme.gradient,
                 backgroundClip: 'text',
                 WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundSize: '200% 200%',
-                animation: 'organic-gradient-shift 3s ease-in-out infinite'
+                WebkitTextFillColor: 'transparent'
               }}
             >
               {hero.title}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-lg lg:text-xl mb-6 lg:mb-8 leading-relaxed"
+            <p
+              className="text-base lg:text-xl mb-6 lg:mb-8 leading-relaxed opacity-0 animate-fade-in"
               style={{ color: theme.dark }}
             >
               {hero.subtitle}
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-start"
+            <div
+              className="flex flex-col sm:flex-row gap-3 lg:gap-6 items-stretch sm:items-start opacity-0 animate-fade-in"
             >
               <button
                 onClick={scrollToContact}
@@ -200,35 +194,28 @@ export function Hero({ hero, theme, contact }: HeroProps) {
                 <MessageCircle size={14} />
                 <span className="text-xs lg:text-sm">{hero.ctaSecondary}</span>
               </button>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Side - Photo Carousel */}
-          <div className="lg:w-1/2 lg:pl-8">
+          <div className="w-full lg:w-1/2 lg:pl-8">
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="relative w-full h-64 lg:h-80 rounded-2xl overflow-hidden shadow-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="relative w-full h-48 lg:h-80 rounded-2xl overflow-hidden shadow-2xl"
               style={{ backgroundColor: theme.light }}
             >
               {/* Carousel Images */}
               <div className="relative w-full h-full">
                 {dentistImages.map((image, index) => (
-                  <motion.img
+                  <img
                     key={index}
                     src={image}
                     alt={`Dental work ${index + 1}`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    initial={{ opacity: 0 }}
-                    animate={{ 
-                      opacity: index === currentImageIndex ? 1 : 0,
-                      scale: index === currentImageIndex ? 1 : 1.1
-                    }}
-                    transition={{ 
-                      duration: 0.6,
-                      ease: [0.4, 0, 0.2, 1]
-                    }}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                      index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                    }`}
                   />
                 ))}
               </div>
@@ -266,7 +253,8 @@ export function Hero({ hero, theme, contact }: HeroProps) {
             </motion.div>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }
