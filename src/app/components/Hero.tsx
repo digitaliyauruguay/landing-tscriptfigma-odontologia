@@ -222,6 +222,7 @@ export function Hero({ hero, theme, contact }: HeroProps) {
             </div>
           </div>
         </div>
+        </div>
       </section>
   );
 }
