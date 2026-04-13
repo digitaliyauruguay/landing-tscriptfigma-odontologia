@@ -245,16 +245,6 @@ export function Testimonials({ testimonials, theme }: TestimonialsProps) {
             ))}
           </div>
         </div>
-
-        {/* Floating decorative elements */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="absolute top-20 right-20 w-16 h-16 rounded-full opacity-15"
-          style={{ backgroundColor: theme.primary }}
-        />
       </div>
     </section>
   );

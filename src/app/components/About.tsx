@@ -205,15 +205,6 @@ export function About({ about, theme }: AboutProps) {
           className="absolute top-32 left-130 w-16 h-16 rounded-full opacity-20"
           style={{ backgroundColor: theme.accent }}
         />
-        
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-32 right-16 w-24 h-24 rounded-full opacity-15"
-          style={{ backgroundColor: theme.primary }}
-        />
       </div>
     </section>
   );

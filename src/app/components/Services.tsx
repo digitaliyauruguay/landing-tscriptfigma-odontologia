@@ -217,16 +217,6 @@ export function Services({ services, theme }: ServicesProps) {
             })}
           </div>
         </div>
-
-        {/* Floating decorative elements */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="absolute bottom-10 right-10 w-20 h-20 rounded-full opacity-15"
-          style={{ backgroundColor: theme.primary }}
-        />
       </div>
     </section>
   );
