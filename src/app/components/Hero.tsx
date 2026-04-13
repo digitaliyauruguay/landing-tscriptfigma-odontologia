@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { Phone, MessageCircle, Leaf, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { useMobileDetection } from "../../hooks/useMobileDetection";
 
 interface HeroProps {
   hero: {
@@ -25,18 +26,7 @@ interface HeroProps {
 
 export function Hero({ hero, theme, contact }: HeroProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile screen size
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // lg breakpoint
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const isMobile = useMobileDetection();
   
   const dentistImages = [
     "https://images.pexels.com/photos/6627413/pexels-photo-6627413.jpeg?auto=compress&cs=tinysrgb&w=400",

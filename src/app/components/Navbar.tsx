@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { useMobileDetection } from "../../hooks/useMobileDetection";
 
 interface NavbarProps {
   brand: { name: string; logo: string };
@@ -9,6 +10,7 @@ interface NavbarProps {
 export function Navbar({ brand, theme }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isMobile = useMobileDetection();
 
   useEffect(() => {
     const handleScroll = () => {
