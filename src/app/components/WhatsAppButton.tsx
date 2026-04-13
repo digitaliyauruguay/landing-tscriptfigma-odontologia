@@ -19,7 +19,7 @@ export function WhatsAppButton({ phone }: WhatsAppButtonProps) {
       aria-label="Contactar por WhatsApp"
     >
       <img 
-        src="src/whatsapp-icon.png" 
+        src="/whatsapp-icon.png" 
         alt="WhatsApp" 
         className="w-10 h-10"
       />
